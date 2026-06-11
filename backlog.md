@@ -10,11 +10,9 @@ This file tracks all tasks for the OpenCrochet project. Update this file before 
 
 ## In Progress
 
-### Phase 4: Documentation (In Progress)
+### Phase 4: Documentation (Completed)
 
-| Task | Description | Priority | Assigned Agent | Status | Coverage |
-|------|-------------|----------|----------------|--------|----------|
-| DOC-006 | Create Storybook stories for all components | Medium | `docs` | in_progress | - |
+All documentation tasks are complete.
 
 ---
 
@@ -80,6 +78,9 @@ This file tracks all tasks for the OpenCrochet project. Update this file before 
 | DOC-003 | Write user guide (upload, filter, export) | Medium | `docs` | completed | N/A |
 | DOC-004 | Write architecture documentation | Medium | `docs` | completed | N/A |
 | DOC-005 | Write image processing algorithm documentation | Medium | `docs` | completed | N/A |
+| DOC-006 | Create Storybook stories for all components | Medium | `docs` | completed | N/A |
+| DOC-007 | Create ADRs for key decisions | Low | `docs` | completed | N/A |
+| DOC-008 | Create onboarding documentation | Low | `docs` | completed | N/A |
 
 ---
 
@@ -92,13 +93,6 @@ No pending tasks.
 ### Phase 3: Testing & Quality
 
 No pending tasks.
-
-### Phase 4: Documentation
-
-| Task | Description | Priority | Assigned Agent | Status | Coverage |
-|------|-------------|----------|----------------|--------|----------|
-| DOC-007 | Create ADRs for key decisions | Low | `docs` | pending | - |
-| DOC-008 | Create onboarding documentation | Low | `docs` | pending | - |
 
 ### Phase 5: Advanced Features (Future)
 

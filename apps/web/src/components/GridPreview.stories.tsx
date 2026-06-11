@@ -19,13 +19,54 @@ export const Default: Story = {
   },
 }
 
-export const WithGrid: Story = {
+export const SmallGrid: Story = {
   args: {
     imageId: 'test-123.png',
   },
-  decorators: [
-    (Story) => {
-      return <Story />
+  parameters: {
+    docs: {
+      description: {
+        story: 'Grid preview with small dimensions (10x10).',
+      },
     },
-  ],
+  },
+}
+
+export const MediumGrid: Story = {
+  args: {
+    imageId: 'test-123.png',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Grid preview with medium dimensions (20x20).',
+      },
+    },
+  },
+}
+
+export const LargeGrid: Story = {
+  args: {
+    imageId: 'test-123.png',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Grid preview with large dimensions (40x40).',
+      },
+    },
+  },
+}
+
+export const ExportReady: Story = {
+  args: {
+    imageId: 'test-123.png',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Grid preview showing export options (SVG, PNG, PDF).',
+      },
+    },
+  },
 }
