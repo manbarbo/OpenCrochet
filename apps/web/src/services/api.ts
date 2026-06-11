@@ -7,7 +7,7 @@ const api = axios.create({
   },
 })
 
-export const uploadImage = async (file: File): Promise<any> => {
+export const uploadImage = async (file: File): Promise<Record<string, unknown>> => {
   const formData = new FormData()
   formData.append('image', file)
 

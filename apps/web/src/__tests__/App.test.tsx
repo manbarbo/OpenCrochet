@@ -37,7 +37,7 @@ jest.mock('../stores/appStore', () => ({
 
 // Mock all child components
 jest.mock('../components/ImageUploader', () => {
-  return function MockImageUploader({ onUpload }: any) {
+  return function MockImageUploader({ onUpload }: { onUpload?: (id: string) => void }) {
     return (
       <div data-testid="mock-image-uploader">
         <button onClick={() => onUpload && onUpload('test-image-123')}>
@@ -49,19 +49,19 @@ jest.mock('../components/ImageUploader', () => {
 })
 
 jest.mock('../components/FilterPanel', () => {
-  return function MockFilterPanel({ imageId }: any) {
+  return function MockFilterPanel({ imageId }: { imageId: string }) {
     return <div data-testid="mock-filter-panel">FilterPanel: {imageId}</div>
   }
 })
 
 jest.mock('../components/GridPreview', () => {
-  return function MockGridPreview({ imageId }: any) {
+  return function MockGridPreview({ imageId }: { imageId: string }) {
     return <div data-testid="mock-grid-preview">GridPreview: {imageId}</div>
   }
 })
 
 jest.mock('../components/ImagePreview', () => {
-  return function MockImagePreview(props: any) {
+  return function MockImagePreview() {
     return <div data-testid="mock-image-preview">ImagePreview</div>
   }
 })

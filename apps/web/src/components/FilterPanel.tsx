@@ -70,7 +70,7 @@ export default function FilterPanel({ imageId }: FilterPanelProps) {
       const data = await response.json()
       setProcessedImage(data.processedImageUrl)
       setCurrentFilter(filterType)
-    } catch (err) {
+    } catch {
       setError('Error al aplicar el filtro')
     } finally {
       setIsProcessing(false)

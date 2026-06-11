@@ -25,25 +25,7 @@ export default function ImageUploader({ onUpload }: ImageUploaderProps) {
     }
   }, [])
 
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    setDragActive(false)
-    
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      const droppedFile = e.dataTransfer.files[0]
-      validateAndSetFile(droppedFile)
-    }
-  }, [])
-
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    if (e.target.files && e.target.files[0]) {
-      validateAndSetFile(e.target.files[0])
-    }
-  }, [])
-
-  const validateAndSetFile = (file: File) => {
+  const validateAndSetFile = useCallback((file: File) => {
     const validTypes = ['image/jpeg', 'image/png', 'image/webp']
     if (!validTypes.includes(file.type)) {
       setError('Solo se permiten archivos JPG, PNG o WebP')
@@ -62,7 +44,25 @@ export default function ImageUploader({ onUpload }: ImageUploaderProps) {
       setPreview(e.target?.result as string)
     }
     reader.readAsDataURL(file)
-  }
+  }, [])
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setDragActive(false)
+    
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      const droppedFile = e.dataTransfer.files[0]
+      validateAndSetFile(droppedFile)
+    }
+  }, [validateAndSetFile])
+
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    if (e.target.files && e.target.files[0]) {
+      validateAndSetFile(e.target.files[0])
+    }
+  }, [validateAndSetFile])
 
   const handleUpload = async () => {
     if (!file) return
@@ -75,7 +75,7 @@ export default function ImageUploader({ onUpload }: ImageUploaderProps) {
       if (onUpload && response?.file?.filename) {
         onUpload(response.file.filename)
       }
-    } catch (err) {
+    } catch {
       setError('Error al subir la imagen. Inténtalo de nuevo.')
     } finally {
       setLoading(false)

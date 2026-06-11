@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import FilterPanel from '../FilterPanel'
