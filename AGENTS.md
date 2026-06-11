@@ -59,7 +59,7 @@ Then implement features in backlog order (Phase 1 → Phase 2 → Phase 3 → Ph
 
 ## Hard Constraints
 
-- **pnpm only** — Never use npm or yarn. The root `package.json` must declare `"packageManager": "pnpm@8.0.0"`.
+- **pnpm only** — Never use npm or yarn. The root `package.json` must declare `"packageManager": "pnpm@11.5.3"`.
 - **TypeScript strict mode** — Every `tsconfig.json` must have `"strict": true`. No `.js` files.
 - **80% coverage minimum** — Every task must have tests before it can be marked `completed` in `backlog.md`. 90% for critical paths (image processing algorithms, API endpoints).
 - **Conventional commits** — Format: `type(scope): subject`. Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `ci`, `infra`.

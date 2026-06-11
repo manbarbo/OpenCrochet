@@ -6,6 +6,13 @@ const config: Config = {
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+    '^../../stores/appStore$': '<rootDir>/src/stores/appStore.ts',
+  },
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
+  globals: {
+    'ts-jest': {
+      tsconfig: '<rootDir>/tsconfig.tests.json'
+    }
   },
   coverageThreshold: {
     global: {
@@ -19,6 +26,7 @@ const config: Config = {
     'src/**/*.{ts,tsx}',
     '!src/**/*.d.ts',
     '!src/**/*.stories.{ts,tsx}',
+    '!src/main.tsx',
   ],
 }
 

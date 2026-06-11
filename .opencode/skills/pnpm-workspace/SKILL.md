@@ -32,7 +32,7 @@ Create `package.json`:
   "version": "1.0.0",
   "description": "Convert images into filet crochet patterns",
   "private": true,
-  "packageManager": "pnpm@8.0.0",
+  "packageManager": "pnpm@11.5.3",
   "scripts": {
     "dev": "docker-compose up -d",
     "dev:web": "pnpm --filter web dev",
