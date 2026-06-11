@@ -1,0 +1,406 @@
+openapi: 3.0.0
+info:
+  title: OpenCrochet API
+  description: API for converting images into filet crochet patterns
+  version: 1.0.0
+  contact:
+    name: OpenCrochet Team
+    url: https://github.com/manuelbarona/opencrochet
+
+servers:
+  - url: http://localhost:3001/api
+    description: Local development server
+
+paths:
+  /upload:
+    post:
+      summary: Upload an image
+      description: Upload an image file (JPG, PNG, WebP) for processing
+      tags:
+        - Upload
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: Image file to upload
+      responses:
+        '200':
+          description: Image uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  file:
+                    type: object
+                    properties:
+                      filename:
+                        type: string
+                        example: "abc123.png"
+                      originalname:
+                        type: string
+                        example: "my-image.png"
+                      mimetype:
+                        type: string
+                        example: "image/png"
+                      size:
+                        type: number
+                        example: 1024567
+        '400':
+          description: Bad request - no file or invalid file type
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "No file uploaded"
+                      code:
+                        type: string
+                        example: "NO_FILE"
+        '500':
+          description: Internal server error
+
+  /process/{filterType}:
+    post:
+      summary: Apply image filter
+      description: Apply a filter (threshold, halftone, posterize, pixelate) to an uploaded image
+      tags:
+        - Processing
+      parameters:
+        - name: filterType
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [threshold, halftone, posterize, pixelate]
+          description: Type of filter to apply
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - imageId
+                - parameters
+              properties:
+                imageId:
+                  type: string
+                  description: Filename of the uploaded image
+                  example: "abc123.png"
+                parameters:
+                  type: object
+                  description: Filter-specific parameters
+                  oneOf:
+                    - $ref: '#/components/schemas/ThresholdParameters'
+                    - $ref: '#/components/schemas/HalftoneParameters'
+                    - $ref: '#/components/schemas/PosterizeParameters'
+                    - $ref: '#/components/schemas/PixelateParameters'
+      responses:
+        '200':
+          description: Image processed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  imageId:
+                    type: string
+                    example: "abc123.png"
+                  filterType:
+                    type: string
+                    example: "threshold"
+                  processedImageUrl:
+                    type: string
+                    example: "/uploads/processed-abc123.png.png"
+        '400':
+          description: Bad request - missing parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Missing imageId or parameters"
+                      code:
+                        type: string
+                        example: "MISSING_PARAMS"
+        '500':
+          description: Processing error
+
+  /preview:
+    post:
+      summary: Generate preview
+      description: Generate a preview of an image with a filter applied
+      tags:
+        - Processing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - imageId
+                - filterType
+                - parameters
+              properties:
+                imageId:
+                  type: string
+                  description: Filename of the uploaded image
+                  example: "abc123.png"
+                filterType:
+                  type: string
+                  enum: [threshold, halftone, posterize, pixelate]
+                  example: "threshold"
+                parameters:
+                  type: object
+                  description: Filter-specific parameters
+      responses:
+        '200':
+          description: Preview generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  imageId:
+                    type: string
+                    example: "abc123.png"
+                  filterType:
+                    type: string
+                    example: "threshold"
+                  previewImageUrl:
+                    type: string
+                    example: "/uploads/preview-abc123.png"
+        '400':
+          description: Bad request
+        '500':
+          description: Preview error
+
+  /grid/generate:
+    post:
+      summary: Generate grid
+      description: Convert a processed image into a 2D grid representation
+      tags:
+        - Grid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - imageId
+                - gridWidth
+                - gridHeight
+              properties:
+                imageId:
+                  type: string
+                  description: Filename of the processed image
+                  example: "abc123.png"
+                gridWidth:
+                  type: number
+                  description: Width of the grid in cells
+                  example: 20
+                  minimum: 5
+                  maximum: 50
+                gridHeight:
+                  type: number
+                  description: Height of the grid in cells
+                  example: 20
+                  minimum: 5
+                  maximum: 50
+      responses:
+        '200':
+          description: Grid generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  grid:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: number
+                        enum: [0, 1]
+                    example: [[0, 1, 0], [1, 0, 1], [0, 1, 0]]
+                  width:
+                    type: number
+                    example: 20
+                  height:
+                    type: number
+                    example: 20
+        '400':
+          description: Bad request
+        '500':
+          description: Grid generation error
+
+  /grid/export:
+    post:
+      summary: Export pattern
+      description: Export a crochet pattern in SVG, PNG, or PDF format
+      tags:
+        - Grid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - imageId
+                - format
+                - gridWidth
+                - gridHeight
+              properties:
+                imageId:
+                  type: string
+                  description: Filename of the processed image
+                  example: "abc123.png"
+                format:
+                  type: string
+                  enum: [svg, png, pdf]
+                  example: "svg"
+                gridWidth:
+                  type: number
+                  description: Width of the grid in cells
+                  example: 20
+                gridHeight:
+                  type: number
+                  description: Height of the grid in cells
+                  example: 20
+      responses:
+        '200':
+          description: Pattern exported successfully
+          content:
+            image/svg+xml:
+              schema:
+                type: string
+                description: SVG pattern
+            image/png:
+              schema:
+                type: string
+                format: binary
+                description: PNG pattern
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  pattern:
+                    type: string
+                    description: Pattern text (for PDF format)
+        '400':
+          description: Bad request
+        '500':
+          description: Export error
+
+components:
+  schemas:
+    ThresholdParameters:
+      type: object
+      properties:
+        threshold:
+          type: number
+          minimum: 0
+          maximum: 255
+          example: 128
+          description: Luminosity threshold (0-255)
+        invert:
+          type: boolean
+          default: false
+          example: false
+          description: Invert the result
+    
+    HalftoneParameters:
+      type: object
+      properties:
+        dotSize:
+          type: number
+          minimum: 1
+          maximum: 20
+          example: 4
+          description: Size of the halftone dots
+    
+    PosterizeParameters:
+      type: object
+      properties:
+        levels:
+          type: number
+          minimum: 2
+          maximum: 256
+          example: 2
+          description: Number of color levels
+    
+    PixelateParameters:
+      type: object
+      properties:
+        blockSize:
+          type: number
+          minimum: 1
+          maximum: 100
+          example: 10
+          description: Size of pixelation blocks
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  code:
+                    type: string
+    
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  code:
+                    type: string

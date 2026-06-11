@@ -2,6 +2,9 @@ import express from 'express'
 import helmet from 'helmet'
 import cors from 'cors'
 import rateLimit from 'express-rate-limit'
+import swaggerUi from 'swagger-ui-express'
+import YAML from 'yamljs'
+import path from 'path'
 import { errorHandler } from './middleware/errorHandler'
 import { routes } from './routes'
 
@@ -26,6 +29,10 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }))
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' })
 })
+
+// Swagger UI
+const swaggerDocument = YAML.load(path.join(process.cwd(), '../../docs/api-spec.yaml'))
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 // Routes
 app.use('/api', routes)
