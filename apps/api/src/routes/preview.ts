@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { previewImage } from '../services/imageService'
 
-const router = Router()
+const router: Router = Router()
 
 router.post('/', async (req, res) => {
   try {

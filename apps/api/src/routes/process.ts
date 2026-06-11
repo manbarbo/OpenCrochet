@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { processImage } from '../services/imageService'
 
-const router = Router()
+const router: Router = Router()
 
 router.post('/:filterType', async (req, res) => {
   try {

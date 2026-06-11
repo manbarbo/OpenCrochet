@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { generateGrid, exportPattern } from '../services/imageService'
 
-const router = Router()
+const router: Router = Router()
 
 router.post('/generate', async (req, res) => {
   try {
