@@ -1,0 +1,64 @@
+{
+  "name": "opencrochet",
+  "version": "1.0.0",
+  "description": "Convert images into filet crochet patterns",
+  "private": true,
+  "packageManager": "pnpm@8.0.0",
+  "scripts": {
+    "dev": "docker-compose up -d",
+    "dev:web": "pnpm --filter web dev",
+    "dev:api": "pnpm --filter api dev",
+    "build": "pnpm -r build",
+    "build:web": "pnpm --filter web build",
+    "build:api": "pnpm --filter api build",
+    "test": "pnpm -r test",
+    "test:web": "pnpm --filter web test",
+    "test:api": "pnpm --filter api test",
+    "test:coverage": "pnpm -r test --coverage",
+    "lint": "pnpm -r lint",
+    "lint:web": "pnpm --filter web lint",
+    "lint:api": "pnpm --filter api lint",
+    "format": "pnpm -r format",
+    "format:web": "pnpm --filter web format",
+    "format:api": "pnpm --filter api format",
+    "storybook": "pnpm --filter web storybook",
+    "build:storybook": "pnpm --filter web build-storybook",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "terraform:plan": "cd terraform && terraform plan -var-file=dev.tfvars",
+    "terraform:apply": "cd terraform && terraform apply -var-file=dev.tfvars",
+    "clean": "pnpm -r clean && rm -rf node_modules",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.0.0",
+    "lint-staged": "^15.0.0",
+    "prettier": "^3.2.0",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yaml,yml}": [
+      "prettier --write"
+    ]
+  }
+}

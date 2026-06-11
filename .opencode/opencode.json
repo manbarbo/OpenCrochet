@@ -1,0 +1,80 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "username": "manuelbarona",
+  "default_agent": "general",
+  "logLevel": "INFO",
+  "instructions": ["AGENTS.md"],
+
+  "skills": {
+    "paths": [".opencode/skills"]
+  },
+
+  "agent": {
+    "frontend-dev": {
+      "description": "React/TypeScript developer specializing in UI/UX implementation with MUI",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-4-6",
+      "permission": { "edit": "allow", "bash": "ask" }
+    },
+    "backend-dev": {
+      "description": "Node.js/Express developer specializing in API design and image processing",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-4-6",
+      "permission": { "edit": "allow", "bash": "ask" }
+    },
+    "image-processing": {
+      "description": "Computer vision and image processing expert for filet crochet pattern generation",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-4-6",
+      "permission": { "edit": "allow", "bash": "ask" }
+    },
+    "devops": {
+      "description": "Infrastructure, CI/CD, and deployment specialist",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-4-6",
+      "permission": { "edit": "allow", "bash": "allow" }
+    },
+    "testing": {
+      "description": "QA/Testing specialist enforcing 80% coverage mandate",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-4-6",
+      "permission": { "edit": "ask", "bash": "ask" }
+    },
+    "docs": {
+      "description": "Technical writer and documentation specialist",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-4-6",
+      "permission": { "edit": "allow", "bash": "deny" }
+    },
+    "ui-ux": {
+      "description": "UI/UX designer for MUI-based design system",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-4-6",
+      "permission": { "edit": "ask", "bash": "deny" }
+    }
+  },
+
+  "command": {
+    "setup": {
+      "description": "Run full project setup (React + Node + Docker + Terraform)",
+      "prompt": "Execute the project setup sequence: 1) Run pnpm-workspace skill, 2) Run react-setup skill, 3) Run node-setup skill, 4) Run docker-setup skill, 5) Run terraform-setup skill. Report progress after each step."
+    },
+    "test": {
+      "description": "Run all tests and verify 80% coverage",
+      "prompt": "Run all tests: pnpm test:web, pnpm test:api. Verify coverage is above 80%. If not, report which files need more tests."
+    },
+    "coverage": {
+      "description": "Generate and review coverage reports",
+      "prompt": "Generate coverage reports for both frontend and backend. Display the coverage percentages and identify any files below 80% threshold."
+    },
+    "backlog": {
+      "description": "Update and review backlog.md",
+      "prompt": "Read and display backlog.md. If there are tasks in progress, report current status. If completing a task, verify it has tests and coverage before marking as completed."
+    }
+  },
+
+  "permission": {
+    "edit": "allow",
+    "bash": { "git *": "allow", "pnpm *": "allow", "docker *": "allow", "terraform *": "allow", "rm *": "ask", "*": "ask" }
+  }
+}
