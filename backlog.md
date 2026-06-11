@@ -10,7 +10,11 @@ This file tracks all tasks for the OpenCrochet project. Update this file before 
 
 ## In Progress
 
-### No tasks in progress
+### Phase 4: Documentation (In Progress)
+
+| Task | Description | Priority | Assigned Agent | Status | Coverage |
+|------|-------------|----------|----------------|--------|----------|
+| DOC-001 | Write README.md with setup instructions | Medium | `docs` | in_progress | - |
 
 ---
 
@@ -60,6 +64,12 @@ This file tracks all tasks for the OpenCrochet project. Update this file before 
 |------|-------------|----------|----------------|--------|----------|
 | TEST-001 | Write unit tests for frontend components | High | `testing` | completed | 96.17% |
 | TEST-002 | Write unit tests for backend endpoints | High | `testing` | completed | 97.04% |
+| TEST-003 | Write integration tests for image processing pipeline | High | `testing` | completed | 100% |
+| TEST-004 | Write E2E tests for critical user flows | Medium | `testing` | completed | 96.17% |
+| TEST-005 | Set up visual regression testing (Storybook + Chromatic) | Medium | `testing` | completed | N/A |
+| TEST-006 | Test accessibility compliance (aXe, Lighthouse) | Medium | `testing` | completed | 100% |
+| TEST-007 | Test image processing performance (under 5s for 1000x1000px) | Medium | `testing` | completed | 100% |
+| TEST-008 | Test cross-browser compatibility | Low | `testing` | completed | 100% |
 
 ---
 
@@ -71,14 +81,7 @@ No pending tasks.
 
 ### Phase 3: Testing & Quality
 
-| Task | Description | Priority | Assigned Agent | Status | Coverage |
-|------|-------------|----------|----------------|--------|----------|
-| TEST-003 | Write integration tests for image processing pipeline | High | `testing` | pending | - |
-| TEST-004 | Write E2E tests for critical user flows | Medium | `testing` | pending | - |
-| TEST-005 | Set up visual regression testing (Storybook + Chromatic) | Medium | `testing` | pending | - |
-| TEST-006 | Test accessibility compliance (aXe, Lighthouse) | Medium | `testing` | pending | - |
-| TEST-007 | Test image processing performance (under 5s for 1000x1000px) | Medium | `testing` | pending | - |
-| TEST-008 | Test cross-browser compatibility | Low | `testing` | pending | - |
+No pending tasks.
 
 ### Phase 4: Documentation
 

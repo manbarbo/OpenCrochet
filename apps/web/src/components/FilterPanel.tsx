@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Box, Button, Typography, Slider, Paper, ToggleButton, ToggleButtonGroup } from '@mui/material'
-import { useAppStore } from '../../stores/appStore'
+import { useAppStore } from '@stores/appStore'
 import ImagePreview from './ImagePreview'
 
 interface FilterPanelProps {
@@ -125,6 +125,7 @@ export default function FilterPanel({ imageId }: FilterPanelProps) {
                 min={0}
                 max={255}
                 valueLabelDisplay="auto"
+                aria-label="Threshold"
               />
               <ToggleButton
                 value="invert"
@@ -148,6 +149,7 @@ export default function FilterPanel({ imageId }: FilterPanelProps) {
                 min={1}
                 max={20}
                 valueLabelDisplay="auto"
+                aria-label="Tamaño de punto"
               />
             </>
           )}
@@ -163,6 +165,7 @@ export default function FilterPanel({ imageId }: FilterPanelProps) {
                 min={2}
                 max={256}
                 valueLabelDisplay="auto"
+                aria-label="Niveles"
               />
             </>
           )}
@@ -178,6 +181,7 @@ export default function FilterPanel({ imageId }: FilterPanelProps) {
                 min={1}
                 max={100}
                 valueLabelDisplay="auto"
+                aria-label="Tamaño de bloque"
               />
             </>
           )}

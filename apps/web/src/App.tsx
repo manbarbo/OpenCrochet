@@ -39,7 +39,7 @@ function App() {
           <Typography variant="h3" component="h1" align="center" gutterBottom>
             OpenCrochet
           </Typography>
-          <Typography variant="subtitle1" align="center" color="text.secondary" sx={{ mb: 4 }}>
+          <Typography variant="subtitle1" component="p" align="center" color="text.secondary" sx={{ mb: 4 }}>
             Convierte imágenes en patrones de crochet filet
           </Typography>
 

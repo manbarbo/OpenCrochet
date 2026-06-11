@@ -116,3 +116,9 @@ jobs:
       
       - name: Build Storybook
         run: pnpm build:storybook
+      - name: Publish to Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          workingDir: apps/web
+          storybookBuildDir: storybook-static

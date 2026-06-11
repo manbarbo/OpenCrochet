@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Box, Button, Typography, Paper, Grid, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import { Download as DownloadIcon } from '@mui/icons-material'
-import { useAppStore } from '../../stores/appStore'
+import { useAppStore } from '@stores/appStore'
 
 interface GridPreviewProps {
   imageId: string
@@ -102,7 +102,7 @@ export default function GridPreview({ imageId }: GridPreviewProps) {
         </Typography>
         <Grid container spacing={2}>
           <Grid size={{ xs: 6 }}>
-            <Typography variant="body2">Ancho: {gridWidth}</Typography>
+            <Typography variant="body2" id="grid-width-label">Ancho: {gridWidth}</Typography>
             <input
               type="range"
               min="5"
@@ -110,10 +110,11 @@ export default function GridPreview({ imageId }: GridPreviewProps) {
               value={gridWidth}
               onChange={(e) => setGridWidth(Number(e.target.value))}
               style={{ width: '100%' }}
+              aria-label="Ancho del grid"
             />
           </Grid>
           <Grid size={{ xs: 6 }}>
-            <Typography variant="body2">Alto: {gridHeight}</Typography>
+            <Typography variant="body2" id="grid-height-label">Alto: {gridHeight}</Typography>
             <input
               type="range"
               min="5"
@@ -121,6 +122,7 @@ export default function GridPreview({ imageId }: GridPreviewProps) {
               value={gridHeight}
               onChange={(e) => setGridHeight(Number(e.target.value))}
               style={{ width: '100%' }}
+              aria-label="Alto del grid"
             />
           </Grid>
         </Grid>
@@ -172,6 +174,7 @@ export default function GridPreview({ imageId }: GridPreviewProps) {
             value={exportFormat}
             exclusive
             onChange={(_, newFormat) => newFormat && setExportFormat(newFormat)}
+            aria-label="Formato de exportación"
             sx={{ mb: 2 }}
           >
             <ToggleButton value="svg">SVG</ToggleButton>

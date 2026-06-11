@@ -117,7 +117,7 @@ export default function ImageUploader({ onUpload }: ImageUploaderProps) {
         <label htmlFor="file-upload">
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
             <CloudUploadIcon sx={{ fontSize: 48, color: dragActive ? 'primary.main' : 'text.secondary' }} />
-            <Typography variant="h6">
+            <Typography variant="h6" component="h2">
               {dragActive ? 'Suelta la imagen aquí' : 'Arrastra y suelta una imagen'}
             </Typography>
             <Typography variant="body2" color="text.secondary">
