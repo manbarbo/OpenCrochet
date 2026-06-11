@@ -4,13 +4,16 @@
 
 ## Current State (Critical)
 
-**This repository is an empty project shell.** No code exists yet. The only files are:
-- `.opencode/` — OpenCode agents and skills
-- `README.md` — Human-readable overview
-- `backlog.md` — Task tracker (all 30+ tasks are `pending`)
-- `AGENTS.md` — This file
+**Phase 1-4 are complete.** The repository is fully functional with:
+- **Frontend**: React 19 + Vite + MUI + TypeScript (strict)
+- **Backend**: Node.js 20 + Express + Sharp + TypeScript (strict)
+- **Shared packages**: Types, image processing, UI components
+- **Infrastructure**: Docker, Terraform, CI/CD
+- **Testing**: 157 tests passing, 96.17% web coverage, 97.04% API coverage
+- **Documentation**: README, API docs, user guide, architecture, ADRs, onboarding
+- **OpenCode**: `/commit`, `/branch`, `/pr` commands available
 
-Everything else must be created from scratch.
+**Phase 5 (Advanced Features)** is pending. See `backlog.md` for task tracker.
 
 ## Architecture
 
@@ -65,6 +68,7 @@ Then implement features in backlog order (Phase 1 → Phase 2 → Phase 3 → Ph
 - **Conventional commits** — Format: `type(scope): subject`. Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `ci`, `infra`.
 - **MUI only** — No CSS modules, SCSS, or styled-components. Use `sx` prop, `styled()`, or theme.
 - **Functional components only** — No class components.
+- **Branch workflow** — Never commit directly to `main`. Always create a feature branch first.
 
 ## Coverage Verification
 
@@ -86,6 +90,30 @@ If coverage is below 80%, the task stays `in_progress`. Update `backlog.md` with
 - **Before starting**: Move task to `in_progress`
 - **After completing**: Move to `completed` with coverage percentage
 - **If blocked**: Move to `blocked` with reason
+
+## Branch Workflow
+
+**Before every implementation, verify the current branch:**
+
+1. Run `git branch --show-current` to check current branch
+2. If on `main`:
+   - **Create a new branch** using `/branch` command
+   - The branch name should follow pattern: `type/description` (e.g., `feat/threshold-filter`, `fix/upload-validation`)
+   - The `/branch` command will pull latest main and create the branch
+3. If on a feature branch:
+   - Continue working on that branch
+   - Make sure it's up to date with main: `git pull origin main`
+
+**After implementation, commit and create PR:**
+
+1. Use `/commit` command to generate conventional commit message and commit changes
+2. Use `/pr` command to create pull request to main
+3. The PR will include:
+   - Title in conventional commit format
+   - Description with summary, changes, testing checklist
+   - Link to related issues if applicable
+
+**Never commit directly to main.**
 
 ## Key Commands
 
@@ -121,7 +149,10 @@ These are registered in `.opencode/opencode.json`:
 - `/test` — Run all tests and verify 80% coverage
 - `/coverage` — Generate and review coverage reports
 - `/backlog` — Update and review backlog.md
+- `/commit` — Generate conventional commit message and commit changes
+- `/branch` — Create a new feature branch from main
+- `/pr` — Create a pull request from current branch to main
 
 ---
 
-**Last Updated:** 2026-06-10
+**Last Updated:** 2026-06-11

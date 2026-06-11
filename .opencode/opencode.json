@@ -74,6 +74,14 @@
     "commit": {
       "description": "Generate conventional commit message and commit changes",
       "prompt": "Use the commit skill. 1) Run `git status` and `git diff --cached` to see staged changes. 2) Determine the correct type (feat/fix/docs/style/refactor/test/chore/ci/infra) and scope (web/api/shared-types/image-processing/ui-components/devops/infra). 3) Generate a conventional commit message in format: `type(scope): subject`. 4) Show the proposed message to the user and ask for confirmation. 5) If confirmed, run `git commit -m \"<message>\"`. If there are multiple logical changes, suggest splitting into multiple commits or using `git commit` with a body."
+    },
+    "branch": {
+      "description": "Create a new feature branch from main",
+      "prompt": "Use the branch skill. 1) Run `git status` to check current branch. 2) If on main, run `git pull origin main` to get latest changes. 3) Determine the branch name based on the task type (feat/fix/docs/refactor/test/chore) and a brief description. 4) Use the pattern: `type/description`. 5) Show the proposed branch name to the user and ask for confirmation. 6) If confirmed, run `git checkout -b <branch-name>`. If not on main, warn the user and ask if they want to switch to main first."
+    },
+    "pr": {
+      "description": "Create a pull request from current branch to main",
+      "prompt": "Use the pr skill. 1) Run `git status` to check current branch. 2) If on main, warn the user and exit. 3) Check if there are uncommitted changes. If so, prompt to commit first. 4) Run `git push origin <branch-name>`. 5) Generate a PR title using conventional commit format: `type(scope): description`. 6) Generate a PR description using the template in .opencode/skills/pr/SKILL.md. 7) Show the proposed PR title and description to the user. 8) Ask for confirmation. 9) If confirmed, create the PR using `gh pr create --title \"<title>\" --body \"<body>\" --base main`. 10) Show the PR URL."
     }
   },
 
