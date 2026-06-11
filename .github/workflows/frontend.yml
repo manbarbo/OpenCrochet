@@ -33,7 +33,7 @@ jobs:
           cache: 'pnpm'
       
       - name: Install dependencies
-        run: pnpm install --ignore-engines
+        run: pnpm install
       
       - name: Build workspace packages
         run: pnpm --filter web^... build
@@ -61,7 +61,7 @@ jobs:
           cache: 'pnpm'
       
       - name: Install dependencies
-        run: pnpm install --ignore-engines
+        run: pnpm install
       
       - name: Build workspace packages
         run: pnpm --filter web^... build
@@ -93,7 +93,7 @@ jobs:
           cache: 'pnpm'
       
       - name: Install dependencies
-        run: pnpm install --ignore-engines
+        run: pnpm install
       
       - name: Build workspace packages
         run: pnpm --filter web^... build
@@ -124,7 +124,7 @@ jobs:
           cache: 'pnpm'
       
       - name: Install dependencies
-        run: pnpm install --ignore-engines
+        run: pnpm install
       
       - name: Build workspace packages
         run: pnpm --filter web^... build
