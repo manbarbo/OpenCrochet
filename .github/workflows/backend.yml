@@ -71,6 +71,12 @@ jobs:
       
       - name: Run tests
         run: pnpm test:api --coverage
+      
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./apps/api/coverage/lcov.info
+          fail_ci_if_error: false
 
   build:
     runs-on: ubuntu-latest
