@@ -70,6 +70,10 @@
     "backlog": {
       "description": "Update and review backlog.md",
       "prompt": "Read and display backlog.md. If there are tasks in progress, report current status. If completing a task, verify it has tests and coverage before marking as completed."
+    },
+    "commit": {
+      "description": "Generate conventional commit message and commit changes",
+      "prompt": "Use the commit skill. 1) Run `git status` and `git diff --cached` to see staged changes. 2) Determine the correct type (feat/fix/docs/style/refactor/test/chore/ci/infra) and scope (web/api/shared-types/image-processing/ui-components/devops/infra). 3) Generate a conventional commit message in format: `type(scope): subject`. 4) Show the proposed message to the user and ask for confirmation. 5) If confirmed, run `git commit -m \"<message>\"`. If there are multiple logical changes, suggest splitting into multiple commits or using `git commit` with a body."
     }
   },
 
