@@ -14,7 +14,7 @@ This file tracks all tasks for the OpenCrochet project. Update this file before 
 
 | Task | Description | Priority | Assigned Agent | Status | Coverage |
 |------|-------------|----------|----------------|--------|----------|
-| DOC-001 | Write README.md with setup instructions | Medium | `docs` | in_progress | - |
+| DOC-006 | Create Storybook stories for all components | Medium | `docs` | in_progress | - |
 
 ---
 
@@ -71,6 +71,16 @@ This file tracks all tasks for the OpenCrochet project. Update this file before 
 | TEST-007 | Test image processing performance (under 5s for 1000x1000px) | Medium | `testing` | completed | 100% |
 | TEST-008 | Test cross-browser compatibility | Low | `testing` | completed | 100% |
 
+### Phase 4: Documentation (Completed)
+
+| Task | Description | Priority | Assigned Agent | Status | Coverage |
+|------|-------------|----------|----------------|--------|----------|
+| DOC-001 | Write README.md with setup instructions | Medium | `docs` | completed | N/A |
+| DOC-002 | Write API documentation (Swagger) | Medium | `docs` | completed | N/A |
+| DOC-003 | Write user guide (upload, filter, export) | Medium | `docs` | completed | N/A |
+| DOC-004 | Write architecture documentation | Medium | `docs` | completed | N/A |
+| DOC-005 | Write image processing algorithm documentation | Medium | `docs` | completed | N/A |
+
 ---
 
 ## Pending
@@ -87,12 +97,6 @@ No pending tasks.
 
 | Task | Description | Priority | Assigned Agent | Status | Coverage |
 |------|-------------|----------|----------------|--------|----------|
-| DOC-001 | Write README.md with setup instructions | Medium | `docs` | pending | - |
-| DOC-002 | Write API documentation (Swagger) | Medium | `docs` | pending | - |
-| DOC-003 | Write user guide (upload, filter, export) | Medium | `docs` | pending | - |
-| DOC-004 | Write architecture documentation | Medium | `docs` | pending | - |
-| DOC-005 | Write image processing algorithm documentation | Medium | `docs` | pending | - |
-| DOC-006 | Create Storybook stories for all components | Medium | `docs` | pending | - |
 | DOC-007 | Create ADRs for key decisions | Low | `docs` | pending | - |
 | DOC-008 | Create onboarding documentation | Low | `docs` | pending | - |
 
@@ -105,12 +109,6 @@ No pending tasks.
 | ADV-003 | Add grid customization (cell size, stitch ratios) | Low | `frontend-dev` | pending | - |
 | ADV-004 | Add batch processing | Low | `backend-dev` | pending | - |
 | ADV-005 | Add user accounts and saved patterns | Low | `backend-dev` | pending | - |
-
----
-
-## Completed
-
-### No tasks completed yet
 
 ---
 
