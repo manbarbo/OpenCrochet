@@ -4,7 +4,7 @@
 
 [![Coverage](https://img.shields.io/badge/coverage-80%25-brightgreen)](https://github.com/manuelbarona/opencrochet)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![pnpm](https://img.shields.io/badge/pnpm-8.0.0-orange)](https://pnpm.io)
+[![pnpm](https://img.shields.io/badge/pnpm-11.5.3-orange)](https://pnpm.io)
 [![React](https://img.shields.io/badge/react-19.0-61dafb)](https://react.dev)
 [![Node.js](https://img.shields.io/badge/node.js-20.0-339933)](https://nodejs.org)
 
@@ -80,10 +80,20 @@ OpenCrochet/
 ├── Makefile               # Common commands
 ├── package.json           # Root package (pnpm workspaces)
 ├── pnpm-workspace.yaml    # Workspace configuration
+├── pnpm-lock.yaml         # Lock file
 ├── .opencode/             # OpenCode agent configuration
 │   ├── opencode.json      # Agent definitions
 │   ├── agents/            # Agent prompts
 │   └── skills/            # Skill definitions
+│       ├── commit/        # Conventional commits skill
+│       ├── pnpm-workspace/
+│       ├── react-setup/
+│       ├── node-setup/
+│       ├── docker-setup/
+│       ├── terraform-setup/
+│       ├── ci-cd-setup/
+│       ├── git-setup/
+│       └── image-processing-pipeline/
 ├── terraform/             # Infrastructure as Code
 │   ├── main.tf
 │   ├── variables.tf
@@ -95,21 +105,28 @@ OpenCrochet/
 ├── apps/
 │   ├── web/               # React frontend application
 │   │   ├── src/
+│   │   │   ├── components/  # React components
+│   │   │   ├── services/    # API services
+│   │   │   ├── stores/      # Zustand stores
+│   │   │   ├── styles/      # Theme configuration
+│   │   │   └── __tests__/   # E2E and cross-browser tests
 │   │   ├── public/
-│   │   ├── tests/
-│   │   ├── stories/
 │   │   ├── package.json
 │   │   ├── vite.config.ts
 │   │   ├── tsconfig.json
-│   │   ├── jest.config.js
-│   │   └── .storybook/
+│   │   ├── jest.config.ts
+│   │   └── .storybook/      # Storybook configuration
 │   └── api/               # Node.js backend API
 │       ├── src/
-│       ├── tests/
-│       ├── uploads/
+│       │   ├── routes/      # Express routes
+│       │   ├── services/    # Business logic
+│       │   ├── middleware/  # Express middleware
+│       │   ├── utils/       # Utilities
+│       │   └── __tests__/   # Integration tests
+│       ├── uploads/         # Uploaded images
 │       ├── package.json
 │       ├── tsconfig.json
-│       └── jest.config.js
+│       └── jest.config.ts
 ├── packages/
 │   ├── shared-types/      # Shared TypeScript types
 │   ├── image-processing/  # Shared image processing logic
@@ -123,7 +140,7 @@ OpenCrochet/
 ## Prerequisites
 
 - **Node.js** 20+ (LTS)
-- **pnpm** 8+ (latest)
+- **pnpm** 11.5.3+ (latest)
 - **Docker** 24+ (for containerization)
 - **Terraform** 1.5+ (for infrastructure)
 - **Git** 2.40+ (for version control)
@@ -200,6 +217,13 @@ pnpm test:api
 
 # Run tests with coverage
 pnpm test:coverage
+
+# Run specific test suites
+pnpm test:web -- --testPathPatterns=e2e     # E2E tests
+pnpm test:web -- --testPathPatterns=a11y     # Accessibility tests
+pnpm test:web -- --testPathPatterns=cross-browser  # Cross-browser tests
+pnpm test:api -- --testPathPatterns=performance    # Performance tests
+pnpm test:api -- --testPathPatterns=integration   # Integration tests
 ```
 
 ### Building
@@ -315,6 +339,7 @@ This project uses OpenCode agents and skills for development. See:
 - `ci-cd-setup` — Set up GitHub Actions
 - `git-setup` — Configure Git repository
 - `pnpm-workspace` — Configure pnpm workspace
+- `commit` — Generate conventional commit messages
 
 ## Task Management
 
@@ -358,6 +383,16 @@ Examples:
 - [Storybook](http://localhost:6006) — Component documentation
 - [Swagger UI](http://localhost:3001/api/docs) — Interactive API documentation
 
+## OpenCode Commands
+
+This project uses OpenCode for AI-assisted development. Available commands:
+
+- `/setup` — Run full project setup (React + Node + Docker + Terraform)
+- `/test` — Run all tests and verify 80% coverage
+- `/coverage` — Generate and review coverage reports
+- `/backlog` — Update and review backlog.md
+- `/commit` — Generate conventional commit message and commit changes
+
 ## License
 
 MIT License — see [LICENSE](LICENSE) for details.
@@ -370,5 +405,5 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 ---
 
-**Last Updated:** 2026-06-10
+**Last Updated:** 2026-06-11
 **Version:** 1.0.0
