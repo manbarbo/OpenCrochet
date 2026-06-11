@@ -19,7 +19,7 @@ export default function FilterPanel({ imageId }: FilterPanelProps) {
   const { processedImage, setProcessedImage, setCurrentFilter, setError } = useAppStore()
 
   const handleFilterChange = (
-    event: React.MouseEvent<HTMLElement>,
+    _event: React.MouseEvent<HTMLElement>,
     newFilter: string,
   ) => {
     if (newFilter !== null) {

@@ -14,7 +14,7 @@ const upload = multer({
   },
 })
 
-const router = Router()
+const router: Router = Router()
 
 router.post('/', upload.single('image'), (req, res) => {
   if (!req.file) {

@@ -8,7 +8,7 @@ import path from 'path'
 import { errorHandler } from './middleware/errorHandler'
 import { routes } from './routes'
 
-const app = express()
+const app: express.Application = express()
 
 // Security middleware
 app.use(helmet())
@@ -31,7 +31,7 @@ app.get('/health', (req, res) => {
 })
 
 // Swagger UI
-const swaggerDocument = YAML.load(path.join(process.cwd(), '../../docs/api-spec.yaml'))
+const swaggerDocument = YAML.load(path.join(__dirname, '../../../docs/api-spec.yaml'))
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 // Routes

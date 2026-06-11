@@ -4,7 +4,7 @@ import { processRouter } from './process'
 import { gridRouter } from './grid'
 import { previewRouter } from './preview'
 
-const router = Router()
+const router: Router = Router()
 
 router.use('/upload', uploadRouter)
 router.use('/process', processRouter)
