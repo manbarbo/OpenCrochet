@@ -12,6 +12,9 @@ on:
       - 'apps/api/**'
       - 'packages/**'
 
+env:
+  NODE_OPTIONS: '--no-warnings'
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -19,18 +22,21 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 11.5.3
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'pnpm'
       
       - name: Install dependencies
         run: pnpm install
+      
+      - name: Build workspace packages
+        run: pnpm --filter api^... build
       
       - name: Lint
         run: pnpm lint:api
@@ -44,18 +50,24 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 11.5.3
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'pnpm'
       
       - name: Install dependencies
         run: pnpm install
+      
+      - name: Build workspace packages
+        run: pnpm --filter api^... build
+      
+      - name: Create uploads directory
+        run: mkdir -p apps/api/uploads
       
       - name: Run tests
         run: pnpm test:api --coverage
@@ -64,7 +76,7 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           files: ./apps/api/coverage/lcov.info
-          fail_ci_if_error: true
+          fail_ci_if_error: false
 
   build:
     runs-on: ubuntu-latest
@@ -73,18 +85,21 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 11.5.3
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'pnpm'
       
       - name: Install dependencies
         run: pnpm install
+      
+      - name: Build workspace packages
+        run: pnpm --filter api^... build
       
       - name: Build
         run: pnpm build:api

@@ -1,12 +1,15 @@
 import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import App from '../App'
+import { uploadImage } from '../services/api'
 
 const theme = createTheme()
 
 jest.mock('../services/api', () => ({
   uploadImage: jest.fn(),
 }))
+
+const mockUploadImage = uploadImage as jest.Mock
 
 const renderWithTheme = (component: React.ReactElement) => {
   return render(
@@ -22,6 +25,7 @@ describe('E2E: Critical User Flows', () => {
     global.fetch = jest.fn()
     global.URL.createObjectURL = jest.fn(() => 'mock-url')
     global.URL.revokeObjectURL = jest.fn()
+    mockUploadImage.mockReset()
   })
 
   afterEach(() => {
@@ -29,9 +33,7 @@ describe('E2E: Critical User Flows', () => {
   })
 
   it('complete flow: upload -> filter -> grid -> export', async () => {
-    const { uploadImage } = require('../services/api')
-    
-    uploadImage.mockResolvedValueOnce({
+    mockUploadImage.mockResolvedValueOnce({
       success: true,
       file: { filename: 'test-123.png', originalname: 'test.png', mimetype: 'image/png', size: 1024 }
     })
@@ -114,9 +116,7 @@ describe('E2E: Critical User Flows', () => {
   })
 
   it('E2E: user can reset and start over', async () => {
-    const { uploadImage } = require('../services/api')
-    
-    uploadImage.mockResolvedValueOnce({
+    mockUploadImage.mockResolvedValueOnce({
       success: true,
       file: { filename: 'test-123.png', originalname: 'test.png', mimetype: 'image/png', size: 1024 }
     })
@@ -186,8 +186,7 @@ describe('E2E: Critical User Flows', () => {
   })
 
   it('E2E: error handling during upload', async () => {
-    const { uploadImage } = require('../services/api')
-    uploadImage.mockRejectedValueOnce(new Error('Network error'))
+    mockUploadImage.mockRejectedValueOnce(new Error('Network error'))
 
     renderWithTheme(<App />)
 
@@ -212,9 +211,7 @@ describe('E2E: Critical User Flows', () => {
   })
 
   it('E2E: filter application error handling', async () => {
-    const { uploadImage } = require('../services/api')
-    
-    uploadImage.mockResolvedValueOnce({
+    mockUploadImage.mockResolvedValueOnce({
       success: true,
       file: { filename: 'test-123.png', originalname: 'test.png', mimetype: 'image/png', size: 1024 }
     })

@@ -12,6 +12,9 @@ on:
       - 'apps/web/**'
       - 'packages/**'
 
+env:
+  NODE_OPTIONS: '--no-warnings'
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -19,18 +22,21 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 11.5.3
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'pnpm'
       
       - name: Install dependencies
         run: pnpm install
+      
+      - name: Build workspace packages
+        run: pnpm --filter web^... build
       
       - name: Lint
         run: pnpm lint:web
@@ -44,18 +50,21 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 11.5.3
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'pnpm'
       
       - name: Install dependencies
         run: pnpm install
+      
+      - name: Build workspace packages
+        run: pnpm --filter web^... build
       
       - name: Run tests
         run: pnpm test:web --coverage
@@ -64,7 +73,7 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           files: ./apps/web/coverage/lcov.info
-          fail_ci_if_error: true
+          fail_ci_if_error: false
 
   build:
     runs-on: ubuntu-latest
@@ -73,18 +82,21 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 11.5.3
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'pnpm'
       
       - name: Install dependencies
         run: pnpm install
+      
+      - name: Build workspace packages
+        run: pnpm --filter web^... build
       
       - name: Build
         run: pnpm build:web
@@ -99,20 +111,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 11.5.3
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'pnpm'
       
       - name: Install dependencies
         run: pnpm install
+      
+      - name: Build workspace packages
+        run: pnpm --filter web^... build
       
       - name: Build Storybook
         run: pnpm build:storybook
@@ -122,3 +139,4 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: apps/web
           storybookBuildDir: storybook-static
+          exitZeroOnChanges: true

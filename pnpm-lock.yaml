@@ -81,6 +81,9 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0
     devDependencies:
+      '@eslint/js':
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@10.4.1)
       '@types/cors':
         specifier: ^2.8.19
         version: 2.8.19
@@ -108,6 +111,9 @@ importers:
       eslint:
         specifier: ^10.4.1
         version: 10.4.1
+      globals:
+        specifier: ^17.6.0
+        version: 17.6.0
       jest:
         specifier: ^30.4.2
         version: 30.4.2(@types/node@25.9.3)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.12))(supports-color@5.5.0)(ts-node@10.9.2(@types/node@25.9.3)(typescript@6.0.3))
@@ -129,6 +135,9 @@ importers:
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
+      typescript-eslint:
+        specifier: ^8.61.0
+        version: 8.61.0(eslint@10.4.1)(typescript@6.0.3)
 
   apps/web:
     dependencies:
@@ -281,6 +290,9 @@ importers:
       '@types/jest':
         specifier: ^30.0.0
         version: 30.0.0
+      '@types/node':
+        specifier: ^25.9.3
+        version: 25.9.3
       eslint:
         specifier: ^10.4.1
         version: 10.4.1
@@ -302,6 +314,9 @@ importers:
       '@types/jest':
         specifier: ^30.0.0
         version: 30.0.0
+      '@types/node':
+        specifier: ^25.9.3
+        version: 25.9.3
       eslint:
         specifier: ^10.4.1
         version: 10.4.1

@@ -1,12 +1,15 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import ImageUploader from '../ImageUploader'
+import { uploadImage } from '../../services/api'
 
 const theme = createTheme()
 
 jest.mock('../../services/api', () => ({
   uploadImage: jest.fn(),
 }))
+
+const mockUploadImage = uploadImage as jest.Mock
 
 const renderWithTheme = (component: React.ReactElement) => {
   return render(
@@ -121,8 +124,7 @@ describe('ImageUploader', () => {
   })
 
   it('handles upload successfully', async () => {
-    const { uploadImage } = require('../../services/api')
-    uploadImage.mockResolvedValueOnce({
+    mockUploadImage.mockResolvedValueOnce({
       file: { filename: 'uploaded-test.png' },
     })
 
@@ -147,8 +149,7 @@ describe('ImageUploader', () => {
   })
 
   it('handles upload error', async () => {
-    const { uploadImage } = require('../../services/api')
-    uploadImage.mockRejectedValueOnce(new Error('Upload failed'))
+    mockUploadImage.mockRejectedValueOnce(new Error('Upload failed'))
 
     renderWithTheme(<ImageUploader />)
     const fileInput = screen.getByTestId('file-input')

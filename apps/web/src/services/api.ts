@@ -1,5 +1,15 @@
 import axios from 'axios'
 
+interface UploadResponse {
+  success: boolean
+  file: {
+    filename: string
+    originalname: string
+    mimetype: string
+    size: number
+  }
+}
+
 const api = axios.create({
   baseURL: '/api',
   headers: {
@@ -7,11 +17,11 @@ const api = axios.create({
   },
 })
 
-export const uploadImage = async (file: File): Promise<any> => {
+export const uploadImage = async (file: File): Promise<UploadResponse> => {
   const formData = new FormData()
   formData.append('image', file)
 
-  const response = await api.post('/upload', formData, {
+  const response = await api.post<UploadResponse>('/upload', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

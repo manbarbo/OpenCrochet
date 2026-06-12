@@ -42,7 +42,6 @@ describe('GridPreview Accessibility', () => {
   })
 
   it('should have no accessibility violations with grid generated', async () => {
-    const mockGrid = [[0, 1], [1, 0]]
     const { container } = renderWithTheme(<GridPreview imageId="test-123.png" />)
     
     // Generate grid
